@@ -18,8 +18,27 @@ function filterEntryItem(_entry, item)
 	end
 end
 
+local seen = {}
+local function recurse(v, name)
+	if type(v) == "table" then
+		if seen[v] then
+			return "RECURSIVE"
+		else
+			seen[v] = true
+			for k, v2 in pairs(v) do
+				v[k] = recurse(v2, name .. "." .. tostring(k))
+			end
+			seen[v] = nil
+		end
+	elseif type(v) == "function" then
+		return "FUNCTION"
+	end
+	return v
+end
+
 return {
 	filter = function (t)
+		recurse(t, "root")
 		for _, entry in pairs(t) do
 			for __, item in pairs(entry["items"]) do
 				filterEntryItem(entry, item)
