@@ -3,7 +3,7 @@
 
 local json = require("json")
 
-function filterEntryItem(entry, item)
+function filterEntryItem(_entry, item)
 	if item["params"] then
 		local params = item["params"]
 		local paramsList = {}
