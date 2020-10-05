@@ -31,14 +31,14 @@
 		{%- else -%}
 			{%- if not loop.first -%}, {% endif -%}
 		{%- endif -%}
-		`{{ param }}`
+		<code>{{ param }}</code>
 		{%- if isOpt -%}\]{%- endif %}
 	{%- endfor -%}
 {%- endmacro -%}
 
 {%- macro render_item(item) %}
 
-### {{ render_return_list(item['modifiers']['return']) }} `{{ item['name'] }}`{%- if item['type'] in ('event', 'function', 'staticfunction') -%}({{ render_params(item) }}){%- endif -%} {{ item['name'] | anchor_here }}
+### {{ render_return_list(item['modifiers']['return']) }} <code>{{ item['name'] }}</code>{%- if item['type'] in ('event', 'function', 'staticfunction') -%}({{ render_params(item) }}){%- endif -%} {{ item['name'] | anchor_here }}
 
 {%- if item['summary']: %}
 
@@ -64,7 +64,7 @@
 {%- endfor -%}
 {%- endmacro -%}
 
-# `{{ entry['name'] }}` {{ entry['name'] | anchor_here }}
+# <code>{{ entry['name'] }}</code> {{ entry['name'] | anchor_here }}
 
 {{ entry['description'] | ldoc }}
 
